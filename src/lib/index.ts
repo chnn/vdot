@@ -2300,7 +2300,7 @@ const TRAINING_TIMES = [
   },
 ];
 
-type RaceDistance =
+export type RaceDistance =
   | "1 mi"
   | "3000 m"
   | "2 mi"
@@ -2310,16 +2310,16 @@ type RaceDistance =
   | "half marathon"
   | "marathon";
 
-type TrainingEffort =
+export type TrainingEffort =
   | "easy"
   | "marathon"
   | "threshold"
   | "interval"
   | "repetitions";
 
-type VdotLevel = number; // Integer between 35 and 85
+export type VdotLevel = number; // Integer between 35 and 85
 
-type VdotInfo = {
+export type VdotInfo = {
   vdot: VdotLevel;
   raceTimes: Record<RaceDistance, number>; // seconds
   trainingPaces: Record<TrainingEffort, number | [number, number]>; // seconds per mile
@@ -2457,4 +2457,17 @@ export const PACE_UNIT_SCALING_FACTORS: Record<PaceUnit, number> = {
   "min / 800m": 0.4970969538,
   "min / 400m": 0.2485484769,
   "min / 200m": 0.1242742384,
+};
+
+export type RaceUnit = "Total Time" | PaceUnit;
+
+export const RACE_UNIT_TO_PACE_DIVISORS: Record<RaceDistance, number> = {
+  "1 mi": 1,
+  "3000 m": 1.8641135767,
+  "2 mi": 2,
+  "5 km": 3.1068559612,
+  "10 km": 6.2137119224,
+  "15 km": 9.3205678836,
+  "half marathon": 13.1093787282,
+  marathon: 26.2187574565,
 };
