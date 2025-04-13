@@ -1,0 +1,10 @@
+:root {
+  --gray-1: #f5f5f4;
+  --gray-2: #e7e5e4;
+  --blue-1: #eff6ff;
+}
+
+html {
+  color-scheme: light;
+  font-family: system-ui;
+}
