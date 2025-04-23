@@ -6,6 +6,7 @@
   "scripts": {
     "start": "parcel",
     "build": "parcel build"
+    "publish": "yarn parcel build ./src/index.html --public-url ./ && yarn push-dir --dir=dist --branch=gh-pages --cleanup --verbose",
   },
   "dependencies": {
     "@radix-ui/react-popover": "^1.1.7",
