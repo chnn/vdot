@@ -1,43 +1,21 @@
 import { useState } from "react";
-import {
-  PACES,
-  PaceUnit,
-  PACE_UNITS,
-  formatDuration,
-  RaceUnit,
-  RACE_UNIT_TO_PACE_DIVISORS,
-  RaceDistance,
-  VdotInfo,
-} from "../lib";
+import { PaceUnit, RaceUnit, PACE_UNITS } from "../lib";
 import { Duration } from "./duration";
-import "./vdot-table.css";
-
-const RaceValue = ({
-  info,
-  distance,
-  unit,
-}: {
-  info: VdotInfo;
-  distance: RaceDistance;
-  unit: RaceUnit;
-}) => {
-  const duration = info.raceTimes[distance];
-  const divisor =
-    unit === "Total Time" ? 1 : RACE_UNIT_TO_PACE_DIVISORS[distance];
-  const paceUnit = unit === "Total Time" ? undefined : unit;
-
-  return <Duration value={duration / divisor} paceUnit={paceUnit} />;
-};
+import classes from "./vdot-table.module.css";
+import { Popover } from "./popover";
+import { Button } from "react-aria-components";
+import { LEVELS } from "../lib/levels";
+import { RaceDuration } from "./race-duration";
 
 export const VdotTable = () => {
   const [raceUnit, setRaceUnit] = useState<RaceUnit>("Total Time");
   const [trainingUnit, setTrainingUnit] = useState<PaceUnit>("min / mi");
 
   return (
-    <table>
-      <thead>
+    <table className={classes.table}>
+      <thead className={classes.tableHeader}>
         <tr>
-          <th colSpan={9} style={{ textAlign: "center" }}>
+          <th colSpan={9} className={classes.tableTopCell}>
             Race Times
             <select
               value={raceUnit}
@@ -52,7 +30,7 @@ export const VdotTable = () => {
               ))}
             </select>
           </th>
-          <th colSpan={9} style={{ textAlign: "center" }}>
+          <th colSpan={9} className={classes.tableTopCell}>
             Training Paces
             <select
               value={trainingUnit}
@@ -85,34 +63,38 @@ export const VdotTable = () => {
         </tr>
       </thead>
       <tbody>
-        {Object.values(PACES).map((d) => (
-          <tr key={d.vdot}>
+        {Object.values(LEVELS).map((d) => (
+          <tr key={d.level}>
             <td>
-              <b>{d.vdot}</b>
+              <b>{d.level}</b>
             </td>
             <td>
-              <RaceValue info={d} distance="1 mi" unit={raceUnit} />
+              <RaceDuration level={d} distance="1 mi" unit={raceUnit} />
             </td>
             <td>
-              <RaceValue info={d} distance="3000 m" unit={raceUnit} />
+              <RaceDuration level={d} distance="3000 m" unit={raceUnit} />
             </td>
             <td>
-              <RaceValue info={d} distance="2 mi" unit={raceUnit} />
+              <RaceDuration level={d} distance="2 mi" unit={raceUnit} />
             </td>
             <td>
-              <RaceValue info={d} distance="5 km" unit={raceUnit} />
+              <RaceDuration level={d} distance="5 km" unit={raceUnit} />
             </td>
             <td>
-              <RaceValue info={d} distance="10 km" unit={raceUnit} />
+              <RaceDuration level={d} distance="10 km" unit={raceUnit} />
             </td>
             <td>
-              <RaceValue info={d} distance="15 km" unit={raceUnit} />
+              <RaceDuration level={d} distance="15 km" unit={raceUnit} />
             </td>
             <td>
-              <RaceValue info={d} distance="half marathon" unit={raceUnit} />
+              <RaceDuration
+                level={d}
+                distance="half marathon"
+                unit={raceUnit}
+              />
             </td>
             <td>
-              <RaceValue info={d} distance="marathon" unit={raceUnit} />
+              <RaceDuration level={d} distance="marathon" unit={raceUnit} />
             </td>
             <td>
               <Duration

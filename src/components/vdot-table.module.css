@@ -1,32 +1,29 @@
-table {
+.table {
   border-collapse: separate;
   font-size: 14px;
   border-spacing: 0;
 }
 
-thead {
+.tableHeader {
   position: sticky;
   top: -1;
   z-index: 2;
 }
 
-thead tr:first-child th {
-  border-top: 1px solid var(--gray-2);
-}
-
-th {
-  background: var(--gray-1);
+.tableTopCell {
+  border-top: 1px solid var(--color-table-border);
+  text-align: center;
 }
 
 th,
 td {
-  border-right: 1px solid var(--gray-2);
-  border-bottom: 1px solid var(--gray-2);
+  border-right: 1px solid var(--color-table-border);
+  border-bottom: 1px solid var(--color-table-border);
 }
 
 tr th:first-child,
 tr td:first-child {
-  border-left: 1px solid var(--gray-2);
+  border-left: 1px solid var(--color-table-border);
 }
 
 thead tr:nth-child(2) th:first-child,
@@ -46,9 +43,9 @@ td {
 }
 
 tbody tr:nth-child(even) td {
-  background: var(--gray-1);
+  background: var(--color-table-cell-contrast);
 }
 
 tbody tr:hover td {
-  background: var(--blue-1);
+  background: var(--color-table-cell-hover);
 }
