@@ -31,30 +31,5 @@ export const RaceDuration = ({
     unit === "Total Time" ? 1 : RACE_UNIT_TO_PACE_DIVISORS[distance];
   const paceUnit = unit === "Total Time" ? undefined : unit;
 
-  return (
-    <Popover
-      trigger={
-        <Button className={styles.trigger}>
-          <Duration value={duration / divisor} paceUnit={paceUnit} />
-        </Button>
-      }
-      content={
-        <table>
-          <tbody>
-            {PACE_UNITS.map((paceUnit) => (
-              <tr key={paceUnit}>
-                <td>
-                  <Duration
-                    value={duration / RACE_UNIT_TO_PACE_DIVISORS[distance]}
-                    paceUnit={paceUnit}
-                  />
-                </td>
-                <td>{paceUnit}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      }
-    />
-  );
+  return <Duration value={duration / divisor} paceUnit={paceUnit} />
 };
