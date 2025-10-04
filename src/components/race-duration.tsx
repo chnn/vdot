@@ -2,9 +2,6 @@ import { PACE_UNITS, RaceUnit } from "../lib";
 import { RaceDistance, VdotLevel } from "../lib/levels";
 import { Duration } from "./duration";
 import { Popover } from "./popover";
-import { Button } from "react-aria-components";
-
-import styles from "./race-duration.module.css";
 
 const RACE_UNIT_TO_PACE_DIVISORS: Record<RaceDistance, number> = {
   "1 mi": 1,

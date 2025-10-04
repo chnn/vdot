@@ -2,8 +2,6 @@ import { useState } from "react";
 import { PaceUnit, RaceUnit, PACE_UNITS } from "../lib";
 import { Duration } from "./duration";
 import classes from "./vdot-table.module.css";
-import { Popover } from "./popover";
-import { Button } from "react-aria-components";
 import { LEVELS } from "../lib/levels";
 import { RaceDuration } from "./race-duration";
 
