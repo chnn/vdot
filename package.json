@@ -9,10 +9,10 @@
     "publish": "yarn parcel build ./src/index.html --public-url ./ && yarn push-dir --dir=dist --branch=gh-pages --cleanup --verbose"
   },
   "dependencies": {
-    "@radix-ui/react-popover": "^1.1.7",
+    "jotai": "^2.15.0",
     "react": "^19.1.0",
-    "react-aria": "^3.39.0",
-    "react-aria-components": "^1.8.0",
+    "react-aria": "^3.44.0",
+    "react-aria-components": "^1.13.0",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {

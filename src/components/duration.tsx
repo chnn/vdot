@@ -25,7 +25,7 @@ const formatDuration = (
   paceUnit?: PaceUnit,
 ): string => {
   if (Array.isArray(n)) {
-    return `${formatDuration(n[0], paceUnit)} - ${formatDuration(n[1], paceUnit)}`;
+    return `${formatDuration(n[1], paceUnit)} - ${formatDuration(n[0], paceUnit)}`;
   }
 
   const m = n * PACE_UNIT_SCALING_FACTORS[paceUnit ?? "min / mi"];

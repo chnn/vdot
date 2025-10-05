@@ -1,12 +1,26 @@
-export type RaceDistance =
-  | "1 mi"
-  | "3000 m"
-  | "2 mi"
-  | "5 km"
-  | "10 km"
-  | "15 km"
-  | "half marathon"
-  | "marathon";
+export const RACE_DISTANCES = [
+  "1 mi",
+  "3000 m",
+  "2 mi",
+  "5 km",
+  "10 km",
+  "15 km",
+  "half marathon",
+  "marathon",
+] as const;
+
+export const RACE_DISTANCE_LABELS = {
+  "1 mi": "Mile",
+  "3000 m": "3K",
+  "2 mi": "2 Mile",
+  "5 km": "5K",
+  "10 km": "10K",
+  "15 km": "15K",
+  "half marathon": "Half Marathon",
+  marathon: "Marathon",
+};
+
+export type RaceDistance = (typeof RACE_DISTANCES)[number];
 
 export type TrainingEffort =
   | "easy"
@@ -14,6 +28,14 @@ export type TrainingEffort =
   | "threshold"
   | "interval"
   | "repetitions";
+
+export const TRAINING_EFFORT_LABELS: Record<TrainingEffort, string> = {
+  easy: "Easy",
+  marathon: "Marathon",
+  threshold: "Threshold",
+  interval: "Intervals",
+  repetitions: "Reps",
+};
 
 export type VdotLevel = {
   level: number;

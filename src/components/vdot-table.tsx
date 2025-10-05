@@ -2,62 +2,56 @@ import { useState } from "react";
 import { PaceUnit, RaceUnit, PACE_UNITS } from "../lib";
 import { Duration } from "./duration";
 import classes from "./vdot-table.module.css";
-import { LEVELS } from "../lib/levels";
+import {
+  LEVELS,
+  RACE_DISTANCE_LABELS,
+  RaceDistance,
+  TRAINING_EFFORT_LABELS,
+} from "../lib/levels";
 import { RaceDuration } from "./race-duration";
+import { useAtom } from "jotai";
+import {
+  raceDistanceVisibilityAtom,
+  usePaceUnit,
+  useVisibleRaceDistances,
+  useVisibleTrainingEfforts,
+} from "../lib/atoms";
 
 export const VdotTable = () => {
-  const [raceUnit, setRaceUnit] = useState<RaceUnit>("Total Time");
-  const [trainingUnit, setTrainingUnit] = useState<PaceUnit>("min / mi");
+  const paceUnit = usePaceUnit();
+
+  const visibleRaceDistances = useVisibleRaceDistances();
+  const visibleTrainingEfforts = useVisibleTrainingEfforts();
 
   return (
     <table className={classes.table}>
       <thead className={classes.tableHeader}>
         <tr>
-          <th colSpan={9} className={classes.tableTopCell}>
+          <th
+            colSpan={visibleRaceDistances.length + 1}
+            className={classes.tableTopCell}
+          >
             Race Times
-            <select
-              value={raceUnit}
-              style={{ marginLeft: 5 }}
-              onChange={(e) => setRaceUnit(e.target.value as PaceUnit)}
-            >
-              <option value="Total Time">Total Time</option>
-              {PACE_UNITS.map((unit) => (
-                <option key={unit} value={unit}>
-                  Pace ({unit})
-                </option>
-              ))}
-            </select>
           </th>
-          <th colSpan={9} className={classes.tableTopCell}>
+          <th
+            colSpan={visibleTrainingEfforts.length}
+            className={classes.tableTopCell}
+          >
             Training Paces
-            <select
-              value={trainingUnit}
-              style={{ marginLeft: 5 }}
-              onChange={(e) => setTrainingUnit(e.target.value as PaceUnit)}
-            >
-              {PACE_UNITS.map((unit) => (
-                <option key={unit} value={unit}>
-                  {unit}
-                </option>
-              ))}
-            </select>
           </th>
         </tr>
         <tr>
           <th>VDOT</th>
-          <th>1 mi</th>
-          <th>3000 m</th>
-          <th>2 mi</th>
-          <th>5 km</th>
-          <th>10 km</th>
-          <th>15 km</th>
-          <th>Half Marathon</th>
-          <th>Marathon</th>
-          <th>Easy</th>
-          <th>Marathon</th>
-          <th>Threshold</th>
-          <th>Interval</th>
-          <th>Repetitions</th>
+          <>
+            {visibleRaceDistances.map((d) => (
+              <th key={d}>{RACE_DISTANCE_LABELS[d]}</th>
+            ))}
+          </>
+          <>
+            {visibleTrainingEfforts.map((d) => (
+              <th key={d}>{TRAINING_EFFORT_LABELS[d]}</th>
+            ))}
+          </>
         </tr>
       </thead>
       <tbody>
@@ -66,64 +60,23 @@ export const VdotTable = () => {
             <td>
               <b>{d.level}</b>
             </td>
-            <td>
-              <RaceDuration level={d} distance="1 mi" unit={raceUnit} />
-            </td>
-            <td>
-              <RaceDuration level={d} distance="3000 m" unit={raceUnit} />
-            </td>
-            <td>
-              <RaceDuration level={d} distance="2 mi" unit={raceUnit} />
-            </td>
-            <td>
-              <RaceDuration level={d} distance="5 km" unit={raceUnit} />
-            </td>
-            <td>
-              <RaceDuration level={d} distance="10 km" unit={raceUnit} />
-            </td>
-            <td>
-              <RaceDuration level={d} distance="15 km" unit={raceUnit} />
-            </td>
-            <td>
-              <RaceDuration
-                level={d}
-                distance="half marathon"
-                unit={raceUnit}
-              />
-            </td>
-            <td>
-              <RaceDuration level={d} distance="marathon" unit={raceUnit} />
-            </td>
-            <td>
-              <Duration
-                value={d.trainingPaces["easy"]}
-                paceUnit={trainingUnit}
-              />
-            </td>
-            <td>
-              <Duration
-                value={d.trainingPaces["marathon"]}
-                paceUnit={trainingUnit}
-              />
-            </td>
-            <td>
-              <Duration
-                value={d.trainingPaces["threshold"]}
-                paceUnit={trainingUnit}
-              />
-            </td>
-            <td>
-              <Duration
-                value={d.trainingPaces["interval"]}
-                paceUnit={trainingUnit}
-              />
-            </td>
-            <td>
-              <Duration
-                value={d.trainingPaces["repetitions"]}
-                paceUnit={trainingUnit}
-              />
-            </td>
+            <>
+              {visibleRaceDistances.map((distance) => (
+                <td key={distance}>
+                  <RaceDuration level={d} distance={distance} unit={paceUnit} />
+                </td>
+              ))}
+            </>
+            <>
+              {visibleTrainingEfforts.map((effort) => (
+                <td key={effort}>
+                  <Duration
+                    value={d.trainingPaces[effort]}
+                    paceUnit={paceUnit}
+                  />
+                </td>
+              ))}
+            </>
           </tr>
         ))}
       </tbody>

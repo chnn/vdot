@@ -2,6 +2,7 @@
   border-collapse: separate;
   font-size: 14px;
   border-spacing: 0;
+  width: 100%;
 
   --color-background: var(--color-white);
   --color-table-border: var(--color-stone-200);
