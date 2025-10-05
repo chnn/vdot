@@ -52,5 +52,10 @@ export const Duration = ({
   value: number | [number, number];
   paceUnit?: PaceUnit;
 }) => {
-  return <span>{formatDuration(value, paceUnit)} </span>;
+  return (
+    <span>
+      {formatDuration(value, paceUnit)}{" "}
+      <span className="text-[10px] text-gray-600">{paceUnit}</span>
+    </span>
+  );
 };

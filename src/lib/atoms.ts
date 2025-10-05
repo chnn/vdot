@@ -1,8 +1,11 @@
-import { atom, useAtomValue } from "jotai";
+import { useAtomValue } from "jotai";
 import { RaceDistance, TrainingEffort } from "./levels";
 import { PaceUnit } from ".";
+import { atomWithStorage } from "jotai/utils";
 
-export const raceDistanceVisibilityAtom = atom<Record<RaceDistance, boolean>>({
+export const raceDistanceVisibilityAtom = atomWithStorage<
+  Record<RaceDistance, boolean>
+>("raceDistanceVisibilityAtom_v0", {
   "1 mi": true,
   "3000 m": false,
   "2 mi": false,
@@ -17,13 +20,13 @@ export const useVisibleRaceDistances = () => {
   const raceDistanceVisibility = useAtomValue(raceDistanceVisibilityAtom);
 
   return Object.entries(raceDistanceVisibility)
-    .filter(([k, v]) => v)
-    .map(([k, v]) => k) as RaceDistance[];
+    .filter(([_, v]) => v)
+    .map(([k, _]) => k) as RaceDistance[];
 };
 
-export const trainingEffortsVisibilityAtom = atom<
+export const trainingEffortsVisibilityAtom = atomWithStorage<
   Record<TrainingEffort, boolean>
->({
+>("trainingEffortsVisibilityAtom_v0", {
   easy: true,
   marathon: true,
   threshold: true,
@@ -35,10 +38,24 @@ export const useVisibleTrainingEfforts = () => {
   const trainingEffortVisibility = useAtomValue(trainingEffortsVisibilityAtom);
 
   return Object.entries(trainingEffortVisibility)
-    .filter(([k, v]) => v)
-    .map(([k, v]) => k) as TrainingEffort[];
+    .filter(([_, v]) => v)
+    .map(([k, _]) => k) as TrainingEffort[];
 };
 
-export const paceUnitAtom = atom<PaceUnit>("min / mi");
+export const paceUnitVisibilityAtom = atomWithStorage<
+  Record<PaceUnit, boolean>
+>("paceUnitVisibilityAtom_v0", {
+  "min / mi": true,
+  "min / km": false,
+  "min / 800m": false,
+  "min / 400m": false,
+  "min / 200m": false,
+});
 
-export const usePaceUnit = () => useAtomValue(paceUnitAtom);
+export const useVisiblePaceUnits = () => {
+  const paceUnitVisibility = useAtomValue(paceUnitVisibilityAtom);
+
+  return Object.entries(paceUnitVisibility)
+    .filter(([_, v]) => v)
+    .map(([k, _]) => k) as PaceUnit[];
+};

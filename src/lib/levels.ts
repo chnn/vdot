@@ -22,12 +22,15 @@ export const RACE_DISTANCE_LABELS = {
 
 export type RaceDistance = (typeof RACE_DISTANCES)[number];
 
-export type TrainingEffort =
-  | "easy"
-  | "marathon"
-  | "threshold"
-  | "interval"
-  | "repetitions";
+export const TRAINING_EFFORTS = [
+  "easy",
+  "marathon",
+  "threshold",
+  "interval",
+  "repetitions",
+];
+
+export type TrainingEffort = (typeof TRAINING_EFFORTS)[number];
 
 export const TRAINING_EFFORT_LABELS: Record<TrainingEffort, string> = {
   easy: "Easy",

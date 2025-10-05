@@ -1,8 +1,6 @@
-import { PACE_UNITS, RaceUnit } from "../lib";
-import { usePaceUnit } from "../lib/atoms";
+import { PaceUnit } from "../lib";
 import { RaceDistance, VdotLevel } from "../lib/levels";
 import { Duration } from "./duration";
-import { Popover } from "./popover";
 
 const RACE_UNIT_TO_PACE_DIVISORS: Record<RaceDistance, number> = {
   "1 mi": 1,
@@ -18,13 +16,13 @@ const RACE_UNIT_TO_PACE_DIVISORS: Record<RaceDistance, number> = {
 export const RaceDuration = ({
   level,
   distance,
+  paceUnits,
 }: {
   level: VdotLevel;
   distance: RaceDistance;
+  paceUnits: PaceUnit[];
 }) => {
-  const paceUnit = usePaceUnit();
   const totalTime = level.raceTimes[distance];
-
   const divisor = RACE_UNIT_TO_PACE_DIVISORS[distance];
 
   return (
@@ -32,10 +30,12 @@ export const RaceDuration = ({
       <div>
         <Duration value={totalTime} />
       </div>
-      <div className="text-xs">
-        <Duration value={totalTime / divisor} paceUnit={paceUnit} />
-        <span className="text-[10px] text-gray-700">{paceUnit}</span>
-      </div>
+      {paceUnits.map((paceUnit) => (
+        <div key={paceUnit} className="text-xs">
+          <span className="text-[10px] text-gray-600">=</span>{" "}
+          <Duration value={totalTime / divisor} paceUnit={paceUnit} />
+        </div>
+      ))}
     </>
   );
 };

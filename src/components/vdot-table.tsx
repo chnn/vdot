@@ -1,31 +1,25 @@
-import { useState } from "react";
-import { PaceUnit, RaceUnit, PACE_UNITS } from "../lib";
 import { Duration } from "./duration";
 import classes from "./vdot-table.module.css";
 import {
   LEVELS,
   RACE_DISTANCE_LABELS,
-  RaceDistance,
   TRAINING_EFFORT_LABELS,
 } from "../lib/levels";
 import { RaceDuration } from "./race-duration";
-import { useAtom } from "jotai";
 import {
-  raceDistanceVisibilityAtom,
-  usePaceUnit,
+  useVisiblePaceUnits,
   useVisibleRaceDistances,
   useVisibleTrainingEfforts,
 } from "../lib/atoms";
 
 export const VdotTable = () => {
-  const paceUnit = usePaceUnit();
-
+  const visiblePaceUnits = useVisiblePaceUnits();
   const visibleRaceDistances = useVisibleRaceDistances();
   const visibleTrainingEfforts = useVisibleTrainingEfforts();
 
   return (
     <table className={classes.table}>
-      <thead className={classes.tableHeader}>
+      <thead>
         <tr>
           <th
             colSpan={visibleRaceDistances.length + 1}
@@ -56,24 +50,32 @@ export const VdotTable = () => {
       </thead>
       <tbody>
         {Object.values(LEVELS).map((d) => (
-          <tr key={d.level}>
+          <tr key={d.level} className="">
             <td>
               <b>{d.level}</b>
             </td>
             <>
               {visibleRaceDistances.map((distance) => (
                 <td key={distance}>
-                  <RaceDuration level={d} distance={distance} unit={paceUnit} />
+                  <RaceDuration
+                    level={d}
+                    distance={distance}
+                    paceUnits={visiblePaceUnits}
+                  />
                 </td>
               ))}
             </>
             <>
               {visibleTrainingEfforts.map((effort) => (
                 <td key={effort}>
-                  <Duration
-                    value={d.trainingPaces[effort]}
-                    paceUnit={paceUnit}
-                  />
+                  {visiblePaceUnits.map((paceUnit) => (
+                    <div key={paceUnit}>
+                      <Duration
+                        value={d.trainingPaces[effort]}
+                        paceUnit={paceUnit}
+                      />
+                    </div>
+                  ))}
                 </td>
               ))}
             </>
