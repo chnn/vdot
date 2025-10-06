@@ -53,10 +53,18 @@ td {
   background: white;
 }
 
-tbody tr:nth-child(even) td {
+tbody tr:nth-child(even):not(.pinnedRow) td {
   background: var(--color-table-cell-contrast);
 }
 
-tbody tr:hover td {
+.pinnedRow td {
+  background: var(--color-amber-50);
+}
+
+tbody tr:not(.pinnedRow):hover td {
   background: var(--color-table-cell-hover);
+}
+
+tbody .pinnedRow:hover td {
+  background: var(--color-amber-100);
 }
