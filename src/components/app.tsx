@@ -12,7 +12,7 @@ export function App() {
           className="border border-zinc-200 rounded bg-zinc-50 py-1 px-2 hover:bg-zinc-100 active:bg-zinc-200 cursor-pointer"
           onClick={() => setSettingsVisible(!settingsVisible)}
         >
-          Settings
+          ⚙️ Settings
         </button>
         {settingsVisible && (
           <div className="border border-gray-200 bg-white rounded py-4 px-8 absolute drop-shadow-sm top-[60px]">

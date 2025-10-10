@@ -13,8 +13,9 @@ import {
   useVisibleTrainingEfforts,
 } from "../lib/atoms";
 import { useAtom } from "jotai";
+import { memo } from "react";
 
-export const VdotTable = () => {
+export const VdotTable = memo(() => {
   const visiblePaceUnits = useVisiblePaceUnits();
   const visibleRaceDistances = useVisibleRaceDistances();
   const visibleTrainingEfforts = useVisibleTrainingEfforts();
@@ -114,4 +115,4 @@ export const VdotTable = () => {
       </tbody>
     </table>
   );
-};
+});
