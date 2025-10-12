@@ -10,14 +10,15 @@
   --color-table-cell-hover: var(--color-blue-50);
 }
 
-.tableHeader {
+.stickyTopCell {
+  border-top: 1px solid var(--color-stone-200);
   position: sticky;
-  top: -1;
   z-index: 2;
+  top: -1px;
 }
 
 .tableTopCell {
-  border-top: 1px solid var(--color-table-border);
+  border-bottom: 0;
   text-align: center;
 }
 
@@ -30,12 +31,6 @@ td {
 tr th:first-child,
 tr td:first-child {
   border-left: 1px solid var(--color-table-border);
-}
-
-thead tr:nth-child(2) th {
-  position: sticky;
-  z-index: 1;
-  top: 0;
 }
 
 tr td:first-child {

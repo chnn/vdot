@@ -47,15 +47,19 @@ export const VdotTable = memo(() => {
           </th>
         </tr>
         <tr>
-          <th>VDOT</th>
+          <th className={classes.stickyTopCell}>VDOT</th>
           <>
             {visibleRaceDistances.map((d) => (
-              <th key={d}>{RACE_DISTANCE_LABELS[d]}</th>
+              <th key={d} className={classes.stickyTopCell}>
+                {RACE_DISTANCE_LABELS[d]}
+              </th>
             ))}
           </>
           <>
             {visibleTrainingEfforts.map((d) => (
-              <th key={d}>{TRAINING_EFFORT_LABELS[d]}</th>
+              <th key={d} className={classes.stickyTopCell}>
+                {TRAINING_EFFORT_LABELS[d]}
+              </th>
             ))}
           </>
         </tr>
