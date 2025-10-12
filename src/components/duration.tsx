@@ -1,6 +1,6 @@
 import { PaceUnit } from "../lib";
 
-const round = (seconds: number, totalDuration: number) => {
+const round = (seconds: number) => {
   return Math.round(seconds);
 };
 
@@ -35,14 +35,14 @@ const formatDuration = (
   const seconds = m % 60;
 
   if (m <= 60) {
-    return `0:${round(seconds, m)}`;
+    return `0:${round(seconds)}`;
   }
 
   if (m < 3600) {
-    return `${minutes}:${leftPad(round(seconds, m))}`;
+    return `${minutes}:${leftPad(round(seconds))}`;
   }
 
-  return `${hours}:${leftPad(minutes)}:${leftPad(round(seconds, m))}`;
+  return `${hours}:${leftPad(minutes)}:${leftPad(round(seconds))}`;
 };
 
 export const Duration = ({

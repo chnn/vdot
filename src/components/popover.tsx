@@ -1,11 +1,5 @@
 import {
-  Button,
-  Dialog,
-  DialogTrigger,
-  Heading,
   OverlayArrow,
-  Popover as ReactAriaPopover,
-  Switch,
   Tooltip,
   TooltipTrigger,
 } from "react-aria-components";

@@ -1,5 +1,3 @@
-import { RaceDistance } from "./levels";
-
 export type PaceUnit = typeof PACE_UNITS[number];
 
 export const PACE_UNITS = [

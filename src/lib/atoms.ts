@@ -1,45 +1,32 @@
 import { useAtomValue, useSetAtom } from "jotai";
-import { RaceDistance, TrainingEffort, VdotLevel } from "./levels";
+import { RaceDistance, TrainingEffort } from "./levels";
 import { PaceUnit } from ".";
 import { atomWithStorage } from "jotai/utils";
 
-export const raceDistanceVisibilityAtom = atomWithStorage<
-  Record<RaceDistance, boolean>
->("raceDistanceVisibilityAtom_v0", {
-  "1 mi": true,
-  "3000 m": false,
-  "2 mi": false,
-  "5 km": true,
-  "10 km": true,
-  "15 km": false,
-  "half marathon": true,
-  marathon: true,
-});
+const visibleRaceDistances = atomWithStorage<RaceDistance[]>(
+  "raceDistanceVisibilityAtom_v1",
+  ["1 mi", "5 km", "10 km", "half marathon", "marathon"],
+);
 
 export const useVisibleRaceDistances = () => {
-  const raceDistanceVisibility = useAtomValue(raceDistanceVisibilityAtom);
-
-  return Object.entries(raceDistanceVisibility)
-    .filter(([_, v]) => v)
-    .map(([k, _]) => k) as RaceDistance[];
+  return useAtomValue(visibleRaceDistances);
 };
 
-export const trainingEffortsVisibilityAtom = atomWithStorage<
-  Record<TrainingEffort, boolean>
->("trainingEffortsVisibilityAtom_v0", {
-  easy: true,
-  marathon: true,
-  threshold: true,
-  interval: true,
-  repetitions: true,
-});
+export const useVisibleRaceDistancesSetter = () => {
+  return useSetAtom(visibleRaceDistances);
+};
+
+const visibleTrainingEfforts = atomWithStorage<TrainingEffort[]>(
+  "trainingEffortsVisibilityAtom_v1",
+  ["easy", "marathon", "threshold", "interval", "repetitions"],
+);
 
 export const useVisibleTrainingEfforts = () => {
-  const trainingEffortVisibility = useAtomValue(trainingEffortsVisibilityAtom);
+  return useAtomValue(visibleTrainingEfforts);
+};
 
-  return Object.entries(trainingEffortVisibility)
-    .filter(([_, v]) => v)
-    .map(([k, _]) => k) as TrainingEffort[];
+export const useVisibleTrainingEffortsSetter = () => {
+  return useSetAtom(visibleTrainingEfforts);
 };
 
 const visiblePaceUnits = atomWithStorage<PaceUnit[]>("visiblePaceUnits_v0", [

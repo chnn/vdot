@@ -14,7 +14,7 @@ export function App() {
           onClick={() => setSettingsVisible(!settingsVisible)}
         />
         {settingsVisible && (
-          <div className="border border-gray-200 bg-white rounded py-4 px-8 absolute drop-shadow-sm top-[60px]">
+          <div className="border border-gray-200 bg-white rounded py-4 px-8 absolute drop-shadow-xs top-[60px]">
             <Settings />
           </div>
         )}

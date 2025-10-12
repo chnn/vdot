@@ -4,30 +4,66 @@ import {
   TRAINING_EFFORT_LABELS,
   TRAINING_EFFORTS,
 } from "../lib/levels";
-import { useAtom } from "jotai";
 import {
-  raceDistanceVisibilityAtom,
-  trainingEffortsVisibilityAtom,
   useVisiblePaceUnits,
   useVisiblePaceUnitsSetter,
+  useVisibleRaceDistances,
+  useVisibleRaceDistancesSetter,
+  useVisibleTrainingEfforts,
+  useVisibleTrainingEffortsSetter,
 } from "../lib/atoms";
 import { PACE_UNITS } from "../lib";
 import { CheckboxFieldset } from "./checkbox-fieldset";
 
 export function Settings() {
-  const [raceDistanceVisibility, setRaceDistanceVisibility] = useAtom(
-    raceDistanceVisibilityAtom,
-  );
-
   const visiblePaceUnits = useVisiblePaceUnits();
   const setVisiblePaceUnits = useVisiblePaceUnitsSetter();
 
-  const [trainingEffortsVisibility, setTrainingEffortsVisbility] = useAtom(
-    trainingEffortsVisibilityAtom,
-  );
+  const visibleRaceDistances = useVisibleRaceDistances();
+  const setVisibleRaceDistances = useVisibleRaceDistancesSetter();
+
+  const visibleTrainingEfforts = useVisibleTrainingEfforts();
+  const setVisibleTrainingEfforts = useVisibleTrainingEffortsSetter();
 
   return (
-    <div className="flex flex-col">
+    <div className="grid grid-cols-3 gap-x-8">
+      <CheckboxFieldset
+        label="Race Distances"
+        values={visibleRaceDistances}
+        options={RACE_DISTANCES.map((distance) => ({
+          value: distance,
+          label: RACE_DISTANCE_LABELS[distance],
+        }))}
+        onChange={(option) => {
+          if (visibleRaceDistances.includes(option.value)) {
+            setVisibleRaceDistances(
+              visibleRaceDistances.filter((d) => d !== option.value),
+            );
+          } else {
+            setVisibleRaceDistances([...visibleRaceDistances, option.value]);
+          }
+        }}
+      />
+      <CheckboxFieldset
+        label="Training Efforts"
+        values={visibleTrainingEfforts}
+        options={TRAINING_EFFORTS.map((effort) => ({
+          value: effort,
+          label: TRAINING_EFFORT_LABELS[effort],
+        }))}
+        onChange={(option) => {
+          if (visibleTrainingEfforts.includes(option.value)) {
+            setVisibleTrainingEfforts(
+              visibleTrainingEfforts.filter((e) => e !== option.value),
+            );
+          } else {
+            setVisibleTrainingEfforts([
+              ...visibleTrainingEfforts,
+              option.value,
+            ]);
+          }
+        }}
+      />
       <CheckboxFieldset
         label="Pace Units"
         values={visiblePaceUnits}
@@ -35,52 +71,16 @@ export function Settings() {
           value: unit,
           label: unit,
         }))}
-        onChange={(option) =>
-          setVisiblePaceUnits([...visiblePaceUnits, option.value])
-        }
+        onChange={(option) => {
+          if (visiblePaceUnits.includes(option.value)) {
+            setVisiblePaceUnits(
+              visiblePaceUnits.filter((u) => u !== option.value),
+            );
+          } else {
+            setVisiblePaceUnits([...visiblePaceUnits, option.value]);
+          }
+        }}
       />
-      <fieldset>
-        <legend className="font-bold">Race Distances</legend>
-        {RACE_DISTANCES.map((d) => (
-          <div className="flex items-center" key={d}>
-            <input
-              className="mr-2"
-              type="checkbox"
-              id={d}
-              value={d}
-              checked={raceDistanceVisibility[d]}
-              onChange={(_) =>
-                setRaceDistanceVisibility({
-                  ...raceDistanceVisibility,
-                  [d]: !raceDistanceVisibility[d],
-                })
-              }
-            />
-            <label htmlFor={d}>{RACE_DISTANCE_LABELS[d]}</label>
-          </div>
-        ))}
-      </fieldset>
-      <fieldset>
-        <legend className="font-bold">Training Efforts</legend>
-        {TRAINING_EFFORTS.map((d) => (
-          <div className="flex items-center" key={d}>
-            <input
-              className="mr-2"
-              type="checkbox"
-              id={d}
-              value={d}
-              checked={trainingEffortsVisibility[d]}
-              onChange={(_) =>
-                setTrainingEffortsVisbility({
-                  ...trainingEffortsVisibility,
-                  [d]: !trainingEffortsVisibility[d],
-                })
-              }
-            />
-            <label htmlFor={d}>{TRAINING_EFFORT_LABELS[d]}</label>
-          </div>
-        ))}
-      </fieldset>
     </div>
   );
 }

@@ -18,7 +18,7 @@ export function CheckboxFieldset<
 
   return (
     <fieldset>
-      <legend className="font-bold">{label}</legend>
+      <legend className="font-bold text-base">{label}</legend>
       {options.map((d) => (
         <div className="flex items-center" key={d.value}>
           <input
@@ -29,7 +29,9 @@ export function CheckboxFieldset<
             checked={valueSet.has(d.value)}
             onChange={(_) => onChange(d)}
           />
-          <label htmlFor={`${id}-${d.value}`}>{label}</label>
+          <label className="text-base" htmlFor={`${id}-${d.value}`}>
+            {d.label}
+          </label>
         </div>
       ))}
     </fieldset>
