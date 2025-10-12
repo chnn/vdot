@@ -6,7 +6,6 @@ import {
 } from "../lib/levels";
 import { useAtom } from "jotai";
 import {
-  paceUnitVisibilityAtom,
   raceDistanceVisibilityAtom,
   trainingEffortsVisibilityAtom,
   useVisiblePaceUnits,
@@ -18,10 +17,6 @@ import { CheckboxFieldset } from "./checkbox-fieldset";
 export function Settings() {
   const [raceDistanceVisibility, setRaceDistanceVisibility] = useAtom(
     raceDistanceVisibilityAtom,
-  );
-
-  const [paceUnitVisibility, setPaceUnitVisibility] = useAtom(
-    paceUnitVisibilityAtom,
   );
 
   const visiblePaceUnits = useVisiblePaceUnits();
@@ -44,27 +39,6 @@ export function Settings() {
           setVisiblePaceUnits([...visiblePaceUnits, option.value])
         }
       />
-      <fieldset>
-        <legend className="font-bold">Pace Units</legend>
-        {PACE_UNITS.map((d) => (
-          <div className="flex items-center" key={d}>
-            <input
-              className="mr-2"
-              type="checkbox"
-              id={d}
-              value={d}
-              checked={paceUnitVisibility[d]}
-              onChange={(_) =>
-                setPaceUnitVisibility({
-                  ...paceUnitVisibility,
-                  [d]: !paceUnitVisibility[d],
-                })
-              }
-            />
-            <label htmlFor={d}>{d}</label>
-          </div>
-        ))}
-      </fieldset>
       <fieldset>
         <legend className="font-bold">Race Distances</legend>
         {RACE_DISTANCES.map((d) => (
