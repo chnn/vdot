@@ -14,12 +14,12 @@ export function App() {
           onClick={() => setSettingsVisible(!settingsVisible)}
         />
         {settingsVisible && (
-          <div className="border border-gray-200 bg-white rounded py-4 px-8 absolute drop-shadow-xs top-[50px]">
+          <div className="border border-border bg-white rounded py-4 px-8 absolute drop-shadow-xs top-[50px]">
             <Settings />
           </div>
         )}
       </div>
-      <div className="overflow-scroll border-t-stone-200 border-t">
+      <div className="overflow-scroll border-border border-t">
         <VdotTable />
       </div>
     </div>

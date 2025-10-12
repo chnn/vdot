@@ -6,6 +6,13 @@
   --blue-1: #eff6ff;
 }
 
+@theme {
+  --color-border: var(--color-stone-200);
+  --color-button-background: var(--color-stone-50);
+  --color-button-background-hover: var(--color-stone-200);
+  --color-button-background-active: var(--color-zinc-200);
+}
+
 html {
   color-scheme: light;
   font-family: system-ui;
