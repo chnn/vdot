@@ -9,8 +9,11 @@ import {
   paceUnitVisibilityAtom,
   raceDistanceVisibilityAtom,
   trainingEffortsVisibilityAtom,
+  useVisiblePaceUnits,
+  useVisiblePaceUnitsSetter,
 } from "../lib/atoms";
 import { PACE_UNITS } from "../lib";
+import { CheckboxFieldset } from "./checkbox-fieldset";
 
 export function Settings() {
   const [raceDistanceVisibility, setRaceDistanceVisibility] = useAtom(
@@ -21,12 +24,26 @@ export function Settings() {
     paceUnitVisibilityAtom,
   );
 
+  const visiblePaceUnits = useVisiblePaceUnits();
+  const setVisiblePaceUnits = useVisiblePaceUnitsSetter();
+
   const [trainingEffortsVisibility, setTrainingEffortsVisbility] = useAtom(
     trainingEffortsVisibilityAtom,
   );
 
   return (
     <div className="flex flex-col">
+      <CheckboxFieldset
+        label="Pace Units"
+        values={visiblePaceUnits}
+        options={PACE_UNITS.map((unit) => ({
+          value: unit,
+          label: unit,
+        }))}
+        onChange={(option) =>
+          setVisiblePaceUnits([...visiblePaceUnits, option.value])
+        }
+      />
       <fieldset>
         <legend className="font-bold">Pace Units</legend>
         {PACE_UNITS.map((d) => (

@@ -1,4 +1,4 @@
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { RaceDistance, TrainingEffort, VdotLevel } from "./levels";
 import { PaceUnit } from ".";
 import { atomWithStorage } from "jotai/utils";
@@ -42,22 +42,16 @@ export const useVisibleTrainingEfforts = () => {
     .map(([k, _]) => k) as TrainingEffort[];
 };
 
-export const paceUnitVisibilityAtom = atomWithStorage<
-  Record<PaceUnit, boolean>
->("paceUnitVisibilityAtom_v0", {
-  "min / mi": true,
-  "min / km": false,
-  "min / 800m": false,
-  "min / 400m": false,
-  "min / 200m": false,
-});
+const visiblePaceUnits = atomWithStorage<PaceUnit[]>("visiblePaceUnits_v0", [
+  "min / mi",
+]);
 
 export const useVisiblePaceUnits = () => {
-  const paceUnitVisibility = useAtomValue(paceUnitVisibilityAtom);
+  return useAtomValue(visiblePaceUnits);
+};
 
-  return Object.entries(paceUnitVisibility)
-    .filter(([_, v]) => v)
-    .map(([k, _]) => k) as PaceUnit[];
+export const useVisiblePaceUnitsSetter = () => {
+  return useSetAtom(visiblePaceUnits);
 };
 
 export const pinnedLevelsAtom = atomWithStorage<number[]>(

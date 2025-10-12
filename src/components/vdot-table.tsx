@@ -23,7 +23,9 @@ export const VdotTable = memo(() => {
   const [pinnedLevels, setPinnedLevels] = useAtom(pinnedLevelsAtom);
 
   const levels = [
-    ...pinnedLevels.map((pinnedLevel) => LEVELS[pinnedLevel]).toSorted(),
+    ...pinnedLevels
+      .map((pinnedLevel) => LEVELS[pinnedLevel])
+      .toSorted((a, b) => a.level - b.level),
     ...Object.values(LEVELS),
   ].filter((level) => level != null);
 
