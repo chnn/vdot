@@ -8,13 +8,13 @@ export function App() {
 
   return (
     <div className="flex flex-col pt-3 w-full h-full bg-(--color-background)">
-      <div className="shrink-0 justify-end mb-3 w-full pr-3 z-10 flex">
+      <div className="shrink-0 justify-end mb-3 w-full pr-3 z-30 flex">
         <Button
           label="⚙️ Settings"
           onClick={() => setSettingsVisible(!settingsVisible)}
         />
         {settingsVisible && (
-          <div className="border border-(--color-border) bg-(--color-background) rounded py-4 px-8 absolute drop-shadow-xs top-[50px]">
+          <div className="border border-(--color-border) bg-(--color-background-higher) rounded py-4 px-8 absolute drop-shadow-xs top-[50px]">
             <Settings />
           </div>
         )}

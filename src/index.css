@@ -5,8 +5,8 @@
 }
 
 :root {
-  /* --color-background: var(--color-zinc-900); */
   --color-background: var(--color-white);
+  --color-background-higher: var(--color-zinc-50);
   --color-border: var(--color-zinc-200);
 
   --color-button-background: var(--color-zinc-50);
@@ -24,8 +24,29 @@
   --color-text-secondary: var(--color-zinc-600);
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: var(--color-zinc-950);
+    --color-background-higher: var(--color-zinc-900);
+    --color-border: var(--color-zinc-800);
+
+    --color-button-background: var(--color-zinc-900);
+    --color-button-background-hover: var(--color-zinc-800);
+    --color-button-background-active: var(--color-zinc-700);
+
+    --color-td-background-contrast: var(--color-zinc-900);
+    --color-td-background-hover: var(--color-blue-950);
+
+    --color-td-background-pinned: var(--color-amber-950);
+    --color-td-background-pinned-hover: var(--color-amber-900);
+
+    --color-text-primary: var(--color-zinc-300);
+    --color-text-secondary: var(--color-zinc-500);
+  }
+}
+
 html {
-  color-scheme: light;
+  color-scheme: light dark;
   font-family: system-ui;
 }
 
