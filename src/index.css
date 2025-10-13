@@ -1,16 +1,27 @@
 @import "tailwindcss";
 
-:root {
-  --gray-1: #f5f5f4;
-  --gray-2: #e7e5e4;
-  --blue-1: #eff6ff;
+@theme {
+  --text-xxs: 0.625rem;
 }
 
-@theme {
-  --color-border: var(--color-stone-200);
-  --color-button-background: var(--color-stone-50);
-  --color-button-background-hover: var(--color-stone-200);
+:root {
+  /* --color-background: var(--color-zinc-900); */
+  --color-background: var(--color-white);
+  --color-border: var(--color-zinc-200);
+
+  --color-button-background: var(--color-zinc-50);
+  --color-button-background-hover: var(--color-zinc-100);
   --color-button-background-active: var(--color-zinc-200);
+
+  --color-table-border: var(--color-zinc-200);
+  --color-td-background-contrast: var(--color-zinc-100);
+  --color-td-background-hover: var(--color-blue-50);
+
+  --color-td-background-pinned: var(--color-amber-50);
+  --color-td-background-pinned-hover: var(--color-amber-100);
+
+  --color-text-primary: var(--color-zinc-900);
+  --color-text-secondary: var(--color-zinc-600);
 }
 
 html {

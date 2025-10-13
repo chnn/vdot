@@ -1,4 +1,5 @@
 import { PaceUnit } from "../lib";
+import { Txt } from "./txt";
 
 const round = (seconds: number) => {
   return Math.round(seconds);
@@ -48,14 +49,18 @@ const formatDuration = (
 export const Duration = ({
   value,
   paceUnit,
+  size = "md",
 }: {
   value: number | [number, number];
   paceUnit?: PaceUnit;
+  size?: "xxs" | "xs" | "sm" | "md" | "lg" | "xl";
 }) => {
   return (
-    <span>
+    <Txt size={size}>
       {formatDuration(value, paceUnit)}{" "}
-      <span className="text-[10px] text-gray-600">{paceUnit}</span>
-    </span>
+      <Txt size="xxs" variant="secondary">
+        {paceUnit}
+      </Txt>
+    </Txt>
   );
 };

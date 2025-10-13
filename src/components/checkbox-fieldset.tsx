@@ -1,4 +1,5 @@
 import { useId, useMemo } from "react";
+import { Txt } from "./txt";
 
 export function CheckboxFieldset<
   TOption extends { value: string; label: string },
@@ -18,7 +19,9 @@ export function CheckboxFieldset<
 
   return (
     <fieldset>
-      <legend className="font-bold text-base">{label}</legend>
+      <legend className="font-bold text-base">
+        <Txt>{label}</Txt>
+      </legend>
       {options.map((d) => (
         <div className="flex items-center" key={d.value}>
           <input
@@ -30,7 +33,7 @@ export function CheckboxFieldset<
             onChange={(_) => onChange(d)}
           />
           <label className="text-base" htmlFor={`${id}-${d.value}`}>
-            {d.label}
+            <Txt>{d.label}</Txt>
           </label>
         </div>
       ))}

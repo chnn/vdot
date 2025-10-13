@@ -7,19 +7,19 @@ export function App() {
   const [settingsVisible, setSettingsVisible] = useState(false);
 
   return (
-    <div className="flex flex-col pt-3 w-full h-full">
+    <div className="flex flex-col pt-3 w-full h-full bg-(--color-background)">
       <div className="shrink-0 justify-end mb-3 w-full pr-3 z-10 flex">
         <Button
           label="⚙️ Settings"
           onClick={() => setSettingsVisible(!settingsVisible)}
         />
         {settingsVisible && (
-          <div className="border border-border bg-white rounded py-4 px-8 absolute drop-shadow-xs top-[50px]">
+          <div className="border border-(--color-border) bg-(--color-background) rounded py-4 px-8 absolute drop-shadow-xs top-[50px]">
             <Settings />
           </div>
         )}
       </div>
-      <div className="overflow-scroll border-border border-t">
+      <div className="overflow-scroll border-(--color-border) border-t">
         <VdotTable />
       </div>
     </div>

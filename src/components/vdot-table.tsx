@@ -14,6 +14,7 @@ import {
 } from "../lib/atoms";
 import { useAtom } from "jotai";
 import { memo } from "react";
+import { Txt } from "./txt";
 
 export const VdotTable = memo(() => {
   const visiblePaceUnits = useVisiblePaceUnits();
@@ -37,13 +38,13 @@ export const VdotTable = memo(() => {
             colSpan={visibleRaceDistances.length + 1}
             className={classes.tableTopCell}
           >
-            Race Times
+            <Txt>Race Times</Txt>
           </th>
           <th
             colSpan={visibleTrainingEfforts.length}
             className={classes.tableTopCell}
           >
-            Training Paces
+            <Txt>Training Paces</Txt>
           </th>
         </tr>
         <tr>
@@ -51,14 +52,14 @@ export const VdotTable = memo(() => {
           <>
             {visibleRaceDistances.map((d) => (
               <th key={d} className={classes.stickyTopCell}>
-                {RACE_DISTANCE_LABELS[d]}
+                <Txt>{RACE_DISTANCE_LABELS[d]}</Txt>
               </th>
             ))}
           </>
           <>
             {visibleTrainingEfforts.map((d) => (
               <th key={d} className={classes.stickyTopCell}>
-                {TRAINING_EFFORT_LABELS[d]}
+                <Txt>{TRAINING_EFFORT_LABELS[d]}</Txt>
               </th>
             ))}
           </>

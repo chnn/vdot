@@ -1,6 +1,7 @@
 import { PaceUnit } from "../lib";
 import { RaceDistance, VdotLevel } from "../lib/levels";
 import { Duration } from "./duration";
+import { Txt } from "./txt";
 
 const RACE_UNIT_TO_PACE_DIVISORS: Record<RaceDistance, number> = {
   "1 mi": 1,
@@ -31,9 +32,11 @@ export const RaceDuration = ({
         <Duration value={totalTime} />
       </div>
       {paceUnits.map((paceUnit) => (
-        <div key={paceUnit} className="text-xs">
-          <span className="text-[10px] text-gray-600">=</span>{" "}
-          <Duration value={totalTime / divisor} paceUnit={paceUnit} />
+        <div key={paceUnit}>
+          <Txt size="xxs" variant="secondary">
+            =
+          </Txt>{" "}
+          <Duration value={totalTime / divisor} paceUnit={paceUnit} size="xs" />
         </div>
       ))}
     </>
